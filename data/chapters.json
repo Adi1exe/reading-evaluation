@@ -1,0 +1,12 @@
+{
+  "1": {
+    "language": "en",
+    "title": "Sample English Chapter",
+    "text": "This is a sample chapter text used for reading evaluation by the student"
+  },
+  "2": {
+    "language": "hi",
+    "title": "सरल हिंदी पाठ",
+    "text": "yaha ek saral hindi path hai"
+  }
+}
