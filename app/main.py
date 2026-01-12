@@ -10,7 +10,6 @@ app = FastAPI()
 
 CHAPTER_PATH = "data/chapters.json"
 
-
 @app.get("/health")
 def health():
     return {"status": "OK"}
@@ -31,10 +30,7 @@ async def assess_audio(
 
     duration_seconds = len(audio) / 1000
 
-    # Speech to text
-    transcript = transcribe_audio(temp_name)
-
-    # Load chapter
+    # Load chapter to get language
     with open(CHAPTER_PATH, "r", encoding="utf-8") as f:
         chapters = json.load(f)
 
@@ -42,11 +38,16 @@ async def assess_audio(
         os.remove(temp_name)
         raise HTTPException(status_code=404, detail="Chapter not found")
 
-    reference_text = chapters[chapter_id]["text"]
+    chapter_data = chapters[chapter_id]
+    language_code = chapter_data.get("language", "en")
+    reference_text = chapter_data["text"]
 
-    # Normalize
-    student_words = normalize_text(transcript)
-    reference_words = normalize_text(reference_text)
+    # Speech to text (with language specification)
+    transcript = transcribe_audio(temp_name, language=language_code)
+
+    # Normalize (with language specification)
+    student_words = normalize_text(transcript, language=language_code)
+    reference_words = normalize_text(reference_text, language=language_code)
 
     # Evaluate
     metrics = evaluate(student_words, reference_words, duration_seconds)

@@ -7,6 +7,11 @@
   "2": {
     "language": "hi",
     "title": "सरल हिंदी पाठ",
-    "text": "yaha ek saral hindi path hai"
+    "text": "यह एक सरल हिंदी पाठ है"
+  },
+  "3": {
+    "language": "mr",
+    "title": "सोपा मराठी पाठ",
+    "text": "हे एक सोपा मराठी पाठ आहे जो वापरला जातो"
   }
 }
